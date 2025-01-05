@@ -1,0 +1,13 @@
+package com.ACMSystem;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AcmSystemApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AcmSystemApplication.class, args);
+	}
+
+}
