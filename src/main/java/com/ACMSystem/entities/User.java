@@ -31,14 +31,21 @@ public class User {
 	private boolean status; 		//Whether the patient is active or not
 	
 	//mapped with the role table
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="rid")
-	Role role;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="rid")
+//	private Role role;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "rid", nullable = false)
+	private Role role;
 	
 	//mapped with the user table
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("user")
 	private Employee employee;
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnoreProperties("user")
+	private Patient patient;
 	
 	public User() {
 		super();		

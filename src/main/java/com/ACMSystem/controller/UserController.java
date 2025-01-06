@@ -3,7 +3,9 @@ package com.ACMSystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +56,12 @@ public class UserController {
 	@GetMapping("/getUserRole/{username}")
 	public String getUserRole(@PathVariable String username) {
 		return userService.getUserRole(username);
+	}
+	
+	@DeleteMapping("/delete/patient/{fname}")
+	public ResponseEntity<String> deletePatient(@PathVariable String fname) {
+	    User deletedUser = userService.deletePatientByFname(fname);
+	    return ResponseEntity.ok("User with first name '" + deletedUser.getFname() + "' has been deleted successfully.");
 	}
 
 }

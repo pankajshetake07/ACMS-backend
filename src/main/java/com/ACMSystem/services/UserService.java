@@ -14,6 +14,8 @@ import com.ACMSystem.repository.PatientRepository;
 import com.ACMSystem.repository.RoleRepository;
 import com.ACMSystem.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserService {
 	@Autowired
@@ -70,5 +72,16 @@ public class UserService {
 	// getting user role based on the user name
 	public String getUserRole(String username) {
 		return userRepository.getUserRole(username);
+	}
+	
+	@Transactional
+	public User deletePatientByFname(String fname) {
+		Optional<User> opt = userRepository.findByFname(fname);
+	    if (!opt.isPresent()) {
+	        throw new RuntimeException("No user found with the first name: " + fname);
+	    }
+	    User user = opt.get();
+	    userRepository.delete(user);
+	    return user;
 	}
 }

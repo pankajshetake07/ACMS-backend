@@ -20,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//native query
 	@Query(value="select r.rname from role r join user u where r.rid = u.uid and u.uname = ?",nativeQuery = true)
 	public String getUserRole(String username);
+	
+	
+	public Optional<User> findByFname(String fname);
 }
